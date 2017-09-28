@@ -5,7 +5,7 @@ package ch.ctrox.school.kiosk.business.products;
  * @since 21/09/17
  */
 public class Magazine extends AbstractProduct {
-  Magazine(String name) {
+  public Magazine(String name) {
     super(name);
   }
 

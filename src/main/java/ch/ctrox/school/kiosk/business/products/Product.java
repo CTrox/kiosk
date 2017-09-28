@@ -6,7 +6,7 @@ package ch.ctrox.school.kiosk.business.products;
  */
 public interface Product {
   String getName();
-  
+
   String getDescription();
 
   void setDescription(String description);
@@ -15,9 +15,9 @@ public interface Product {
 
   void setId(int id);
 
-  int getPrice();
+  double getPrice();
 
-  void setPrice(int price);
+  void setPrice(double price);
 
   boolean requiresAgeCheck();
 

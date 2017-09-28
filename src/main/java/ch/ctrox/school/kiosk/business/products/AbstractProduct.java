@@ -8,7 +8,7 @@ abstract class AbstractProduct implements Product {
   private String name;
   private String description;
   private int id;
-  private int price;
+  private double price;
 
   AbstractProduct(String name) {
     this.name = name;
@@ -33,7 +33,7 @@ abstract class AbstractProduct implements Product {
     this.id = id;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return price;
   }
 
