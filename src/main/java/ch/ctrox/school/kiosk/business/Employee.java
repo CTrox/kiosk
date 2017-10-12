@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import ch.ctrox.school.kiosk.business.products.Product;
+import ch.ctrox.school.kiosk.error.NoIdentificationException;
+import ch.ctrox.school.kiosk.error.UnderageException;
 
 /**
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
@@ -18,14 +20,6 @@ public class Employee {
   private int kioskId;
 
   private static final Logger logger = LogManager.getLogger(Employee.class);
-
-  public class UnderageException extends Exception {
-    public UnderageException(String message) { super(message); }
-  }
-
-  public class NoIdentificationException extends Exception {
-    public NoIdentificationException(String message) { super(message); }
-  }
 
   public Employee(String name) {
     this.name = name;

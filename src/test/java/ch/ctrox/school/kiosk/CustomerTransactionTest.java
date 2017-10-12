@@ -2,11 +2,8 @@ package ch.ctrox.school.kiosk;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import ch.ctrox.school.kiosk.business.Customer;
@@ -14,6 +11,8 @@ import ch.ctrox.school.kiosk.business.Employee;
 import ch.ctrox.school.kiosk.business.products.Magazine;
 import ch.ctrox.school.kiosk.business.products.Product;
 import ch.ctrox.school.kiosk.business.products.StrongAlcohol;
+import ch.ctrox.school.kiosk.error.NoIdentificationException;
+import ch.ctrox.school.kiosk.error.UnderageException;
 
 /**
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
@@ -23,9 +22,8 @@ import ch.ctrox.school.kiosk.business.products.StrongAlcohol;
 public class CustomerTransactionTest {
   private static final Logger logger = LogManager.getLogger(CustomerTransactionTest.class);
 
-
-  @Test(expected = Employee.UnderageException.class)
-  public void testSellingAlcoholToUnderage() throws Employee.NoIdentificationException, Employee.UnderageException {
+  @Test(expected = UnderageException.class)
+  public void testSellingAlcoholToUnderage() throws NoIdentificationException, UnderageException {
     Employee employee = new Employee("Hans Verkauf");
     Customer customer = new Customer();
     customer.setBirthDate(new GregorianCalendar(2010, 3, 23));
@@ -40,10 +38,10 @@ public class CustomerTransactionTest {
     Product magazine = new Magazine("Ride");
     try {
       employee.sellProduct(magazine, customer);
-    } catch (Employee.UnderageException e) {
+    } catch (UnderageException e) {
       logger.error(e.getMessage());
       e.printStackTrace();
-    } catch (Employee.NoIdentificationException e) {
+    } catch (NoIdentificationException e) {
       e.printStackTrace();
     }
   }
