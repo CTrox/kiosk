@@ -37,7 +37,7 @@ abstract class AbstractProduct implements Product {
     return price;
   }
 
-  public void setPrice(int price) {
+  public void setPrice(double price) {
     this.price = price;
   }
 
