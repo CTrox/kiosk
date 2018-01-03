@@ -9,6 +9,8 @@ import java.util.List;
 public interface Product {
   String getName();
 
+  void setName(String name);
+
   String getDescription();
 
   void setDescription(String description);
@@ -24,6 +26,5 @@ public interface Product {
   boolean requiresAgeCheck();
 
   int getRequiredAge();
-
 
 }

@@ -9,6 +9,10 @@ public class Snack extends AbstractProduct {
     super(name);
   }
 
+  public Snack() {
+    super();
+  }
+
   public enum Type {
     SANDWICH("Sandwich"),
     SWEET("Süssig"),

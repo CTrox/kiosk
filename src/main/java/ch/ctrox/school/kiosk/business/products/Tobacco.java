@@ -9,6 +9,10 @@ public class Tobacco extends AbstractProduct {
     super(name);
   }
 
+  public Tobacco() {
+    super();
+  }
+
   @Override
   public boolean requiresAgeCheck() {
     return true;

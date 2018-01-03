@@ -12,6 +12,10 @@ public class SoftDrink extends AbstractProduct {
     super(name);
   }
 
+  public SoftDrink() {
+    super();
+  }
+
   public int getAmountInDCL() {
     return amountInDCL;
   }

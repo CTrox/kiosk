@@ -9,6 +9,10 @@ public class Magazine extends AbstractProduct {
     super(name);
   }
 
+  public Magazine() {
+    super();
+  }
+
   public enum Type {
     LOCAL("Lokal"),
     INTERNATIONAL("International"),

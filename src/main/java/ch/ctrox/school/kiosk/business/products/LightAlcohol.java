@@ -12,6 +12,10 @@ public class LightAlcohol extends AbstractProduct {
     super(name);
   }
 
+  public LightAlcohol() {
+    super();
+  }
+
   @Override
   public boolean requiresAgeCheck() {
     return true;
