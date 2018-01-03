@@ -25,11 +25,5 @@ public interface Product {
 
   int getRequiredAge();
 
-  static double getPriceTotal(List<Product> products) {
-    double total = 0d;
-    for (Product product: products) {
-      total += product.getPrice();
-    }
-    return total;
-  }
+
 }

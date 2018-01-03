@@ -9,6 +9,7 @@ import java.util.List;
 
 import ch.ctrox.school.kiosk.business.Checkout;
 import ch.ctrox.school.kiosk.business.Supplier;
+import ch.ctrox.school.kiosk.business.products.Inventory;
 import ch.ctrox.school.kiosk.business.products.LightAlcohol;
 import ch.ctrox.school.kiosk.business.products.Product;
 import ch.ctrox.school.kiosk.business.products.SoftDrink;
@@ -34,18 +35,12 @@ public class SupplierTest {
 
   @Test
   public void TestValidProductOrder() {
-    Product vodka = new StrongAlcohol("Vodka");
-    Product beer = new LightAlcohol("Sudwerk Pale Ale");
-    Product coke = new SoftDrink("Coca Cola");
+    Inventory inventory = TestData.Get();
     Checkout checkout = new Checkout();
     checkout.putCash(1000000.0);
 
-    List<Product> productList = new ArrayList<>();
-    productList.add(vodka);
-    productList.add(beer);
-    productList.add(coke);
     double cash = 0.0;
-    double orderPrice = Product.getPriceTotal(productList);
+    double orderPrice = inventory.getTotalPrice();
     try {
        cash = checkout.getCash(orderPrice);
     } catch (InsufficentFundsException e) {
@@ -53,6 +48,6 @@ public class SupplierTest {
       e.printStackTrace();
     }
     Supplier supplier = new Supplier();
-    assertTrue(supplier.orderProducts(productList, cash));
+    assertTrue(supplier.orderProducts(inventory.getList(), cash));
   }
 }
