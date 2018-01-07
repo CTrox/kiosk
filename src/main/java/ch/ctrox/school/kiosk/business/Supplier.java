@@ -3,6 +3,7 @@ package ch.ctrox.school.kiosk.business;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
 import java.util.List;
 
 import ch.ctrox.school.kiosk.business.products.Product;
@@ -14,7 +15,7 @@ import ch.ctrox.school.kiosk.business.products.Product;
 public class Supplier {
   private static final Logger logger = LogManager.getLogger(Supplier.class);
 
-  public boolean orderProducts(List<Product> productList, double money) {
+  public boolean orderProducts(Collection<Product> productList, double money) {
     for (Product product : productList) {
       logger.info(String.format("Ordering product %s", product.getName()));
     }

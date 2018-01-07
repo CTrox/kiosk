@@ -27,4 +27,9 @@ public interface Product {
 
   int getRequiredAge();
 
+  void addCount();
+
+  int getCount();
+
+  void setCount(int count);
 }

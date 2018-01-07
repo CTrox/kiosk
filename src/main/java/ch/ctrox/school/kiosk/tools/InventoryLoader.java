@@ -28,14 +28,15 @@ public class InventoryLoader {
       }
 
       String[] lineArr = it.next().split(",");
-      if (lineArr.length < 5) {
-        throw new InvalidInventoryException("Inventory CSV should have 5 columns");
+      if (lineArr.length < 6) {
+        throw new InvalidInventoryException("Inventory CSV should have 6 columns");
       }
       int id = Integer.parseInt(lineArr[0]);
       String name = lineArr[1];
       String category = lineArr[2];
       String description = lineArr[3];
       double price = Double.parseDouble(lineArr[4]);
+      int count = Integer.parseInt(lineArr[5]);
       Product product = ProductFactory.build(category);
       if (product == null) {
         throw new InvalidInventoryException("Invalid category in list: " + category);
@@ -44,6 +45,7 @@ public class InventoryLoader {
       product.setName(name);
       product.setPrice(price);
       product.setDescription(description);
+      product.setCount(count);
       inventory.add(product);
     }
     return inventory;

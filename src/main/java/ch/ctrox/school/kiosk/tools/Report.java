@@ -26,7 +26,7 @@ public class Report {
       sb.append(',');
       sb.append(product.getPrice());
       sb.append(',');
-      sb.append(Collections.frequency(inventory.getList(), product.getId()));
+      sb.append(product.getCount());
       sb.append('\n');
     }
     return sb.toString();

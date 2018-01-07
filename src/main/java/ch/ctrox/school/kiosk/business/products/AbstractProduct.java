@@ -9,6 +9,7 @@ abstract class AbstractProduct implements Product {
   private String description;
   private int id;
   private double price;
+  private int count;
 
   AbstractProduct(String name) {
     this.name = name;
@@ -55,4 +56,15 @@ abstract class AbstractProduct implements Product {
     return 0;
   }
 
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
+
+  public void addCount() {
+    this.count++;
+  }
 }

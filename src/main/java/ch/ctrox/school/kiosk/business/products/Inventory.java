@@ -1,22 +1,30 @@
 package ch.ctrox.school.kiosk.business.products;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Inventory {
-  private List<Product> list;
+  private HashMap<Integer, Product> list;
 
   public Inventory() {
-    this.list = new ArrayList<>();
+    this.list = new HashMap<>();
   }
 
-  public List<Product> getList() {
-    return list;
+  public Collection<Product> getList() {
+    return list.values();
   }
 
   public void add(Product product) {
-    this.list.add(product);
+    if (this.list.containsKey(product.getId())) {
+      // Increment count if product is already in inventory
+      this.list.get(product.getId()).addCount();
+    } else {
+      if (product.getCount() == 0) {
+        // set initial count
+        product.addCount();
+      }
+      this.list.put(product.getId(), product);
+    }
   }
 
   public Product get(int i) {
@@ -25,14 +33,10 @@ public class Inventory {
 
   public double getTotalPrice() {
     double total = 0d;
-    for (Product product: this.list) {
+    for (Product product: this.list.values()) {
       total += product.getPrice();
     }
     return total;
-  }
-
-  public int getCount(Product product) {
-    return Collections.frequency(this.list, product.getId());
   }
 
 
