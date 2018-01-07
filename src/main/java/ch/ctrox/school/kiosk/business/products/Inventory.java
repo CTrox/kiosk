@@ -34,7 +34,7 @@ public class Inventory {
   public double getTotalPrice() {
     double total = 0d;
     for (Product product: this.list.values()) {
-      total += product.getPrice();
+      total += product.getPrice() * product.getCount();
     }
     return total;
   }
