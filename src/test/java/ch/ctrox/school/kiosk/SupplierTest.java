@@ -1,9 +1,14 @@
 package ch.ctrox.school.kiosk;
 
+import ch.ctrox.school.kiosk.error.InvalidInventoryException;
+import ch.ctrox.school.kiosk.tools.InventoryLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +39,15 @@ public class SupplierTest {
   }
 
   @Test
-  public void TestValidProductOrder() {
-    Inventory inventory = TestData.Get();
+  public void TestValidProductOrder() throws IOException, InvalidInventoryException {
+    Path orderFile = Paths.get("./src/test/csv/productlist.csv");
+    InventoryLoader loader = new InventoryLoader();
+    Inventory productList = loader.load(orderFile);
     Checkout checkout = new Checkout();
     checkout.putCash(1000000.0);
 
     double cash = 0.0;
-    double orderPrice = inventory.getTotalPrice();
+    double orderPrice = productList.getTotalPrice();
     try {
        cash = checkout.getCash(orderPrice);
     } catch (InsufficentFundsException e) {
@@ -48,6 +55,6 @@ public class SupplierTest {
       e.printStackTrace();
     }
     Supplier supplier = new Supplier();
-    assertTrue(supplier.orderProducts(inventory.getList(), cash));
+    assertTrue(supplier.orderProducts(orderFile, cash));
   }
 }
