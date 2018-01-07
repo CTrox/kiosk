@@ -2,6 +2,7 @@ package ch.ctrox.school.kiosk.tools;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ListIterator;
@@ -12,8 +13,8 @@ import ch.ctrox.school.kiosk.business.products.ProductFactory;
 import ch.ctrox.school.kiosk.error.InvalidInventoryException;
 
 public class InventoryLoader {
-  public Inventory load(String fileName) throws IOException, InvalidInventoryException {
-    List<String> csv = Files.readAllLines(Paths.get(fileName));
+  public Inventory load(Path file) throws IOException, InvalidInventoryException {
+    List<String> csv = Files.readAllLines(file);
     return csvToInventory(csv);
   }
 
@@ -22,12 +23,13 @@ public class InventoryLoader {
     for (ListIterator<String> it = csv.listIterator(); it.hasNext();) {
       // skip the header line
       if (it.nextIndex() == 0) {
+        it.next();
         continue;
       }
 
       String[] lineArr = it.next().split(",");
-      if (lineArr.length < 6) {
-        throw new InvalidInventoryException("Inventory CSV should have 6 columns");
+      if (lineArr.length < 5) {
+        throw new InvalidInventoryException("Inventory CSV should have 5 columns");
       }
       int id = Integer.parseInt(lineArr[0]);
       String name = lineArr[1];

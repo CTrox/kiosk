@@ -10,7 +10,7 @@ import ch.ctrox.school.kiosk.business.products.Product;
 
 public class Report {
   public void generate(Inventory inventory) throws IOException {
-    Files.write(Paths.get("./inventory.csv"), productsToCSV(inventory).getBytes());
+    Files.write(Paths.get("./src/test/csv/inventory.csv"), productsToCSV(inventory).getBytes());
   }
 
   private String productsToCSV(Inventory inventory) {
