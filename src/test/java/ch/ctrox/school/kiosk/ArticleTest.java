@@ -12,7 +12,7 @@ import ch.ctrox.school.kiosk.business.products.StrongAlcohol;
 
 public class ArticleTest {
   @Test
-  public static void main(String[] args) {
+  public void testArticle() {
     System.out.println("test");
 
     Product vodka = new StrongAlcohol("Vodka");
