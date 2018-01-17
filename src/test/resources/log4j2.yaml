@@ -1,15 +1,26 @@
 Configuration:
   status: warn
-
+  properties:
+    property:
+      name: filename
+      value: log/transaction.log
   Appenders:
     Console:
       name: Console
       target: SYSTEM_OUT
       PatternLayout:
-        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-
+        Pattern: "%msg%n"
+    File:
+      name: File
+      fileName: log/transaction.log
+      PatternLayout:
+        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n"
   Loggers:
     Root:
-      level: info
-      AppenderRef:
-        ref: Console
+      -
+        level: info
+        AppenderRef:
+          -
+            ref: File
+          -
+            ref: Console

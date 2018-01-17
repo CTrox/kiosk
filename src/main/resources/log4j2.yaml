@@ -1,12 +1,28 @@
 Configuration:
   status: warn
+  properties:
+    property:
+      name: filename
+      value: log/transaction.log
   Appenders:
     Console:
       name: Console
       target: SYSTEM_OUT
       PatternLayout:
-        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n"
+    File:
+      name: File
+      fileName: log/transaction.log
+      PatternLayout:
+        Pattern: "%d %p %C{1.} [%t] %m%n"
   Loggers:
+    logger:
+      -
+        name: org.apache.logging.log4j.test2
+        level: info
+        additivity: false
+        AppenderRef:
+          ref: File
     Root:
       level: info
       AppenderRef:

@@ -1,5 +1,6 @@
 doc/
 out/
+log/
 *.class
 *.jar
 *.war
