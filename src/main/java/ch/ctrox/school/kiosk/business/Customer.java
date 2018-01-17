@@ -10,12 +10,16 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */
-public class Customer {
+public class Customer extends Thread {
   private static final AtomicInteger count = new AtomicInteger(0);
   private static final Logger logger = LogManager.getLogger(Kiosk.class);
   private Calendar birthDate;
   private int age;
   private long id;
+
+  public void run(){
+    System.out.println("Thread Running");
+  }
 
   public Customer() {
     this.id = count.incrementAndGet();
@@ -41,7 +45,9 @@ public class Customer {
   }
 
   // customer always got cash
-  public double getCash(double amount) {
+  public double getCash(double amount) throws InterruptedException {
+    logger.info(String.format("Customer %s is paying", this.id));
+    sleep(5000);
     return amount;
   }
 

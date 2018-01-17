@@ -82,7 +82,12 @@ public class Employee {
     }
 
     Checkout checkout = new Checkout(this);
-    double cash = customer.getCash(product.getPrice());
+    double cash = 0;
+    try {
+      cash = customer.getCash(product.getPrice());
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     checkout.putCash(cash);
 
     logger.info(String.format(
