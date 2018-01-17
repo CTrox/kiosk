@@ -17,16 +17,18 @@ import ch.ctrox.school.kiosk.error.UnderageException;
  */
 public class Employee {
   private static final AtomicInteger count = new AtomicInteger(0);
+  private static final Logger logger = LogManager.getLogger(Employee.class);
   private String name;
   private int id;
   private Kiosk kiosk;
 
-  private static final Logger logger = LogManager.getLogger(Employee.class);
 
   public Employee(String name, Kiosk kiosk) {
     this.name = name;
     this.kiosk = kiosk;
     this.id = count.incrementAndGet();
+    // open kiosk
+    kiosk.open(this);
   }
 
   public String getName() {
@@ -44,17 +46,23 @@ public class Employee {
   public Product sellProduct(Product product, Customer customer)
           throws UnderageException, NoIdentificationException, InvalidProductException, OutOfStockException {
     Product inventoryProduct = kiosk.getInventory().getByName(product.getName());
+
     if (inventoryProduct == null) {
       throw new InvalidProductException(String.format(
               "Requested Product '%s' does not exist in kiosk inventory",
               product.getName()));
     }
+
     if (inventoryProduct.getCount() < product.getCount()) {
       throw new OutOfStockException(String.format(
               "Requested count (%s) of Product '%s' is more than in stock",
               product.getName(),
               product.getCount()));
     }
+
+    // use the product from the inventory as it is more complete
+    product = inventoryProduct;
+
     if (product.requiresAgeCheck()) {
       if (customer.getBirthDate() == null) {
         throw new NoIdentificationException(String.format(
@@ -63,6 +71,7 @@ public class Employee {
             customer.getId()
         ));
       }
+
       if (customer.getAge() < product.getRequiredAge()) {
         throw new UnderageException(String.format(
             "Error selling product '%s', customer %s is underage",
@@ -71,7 +80,8 @@ public class Employee {
         ));
       }
     }
-    Checkout checkout = new Checkout();
+
+    Checkout checkout = new Checkout(this);
     double cash = customer.getCash(product.getPrice());
     checkout.putCash(cash);
 

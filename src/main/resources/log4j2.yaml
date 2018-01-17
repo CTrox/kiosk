@@ -9,21 +9,18 @@ Configuration:
       name: Console
       target: SYSTEM_OUT
       PatternLayout:
-        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n"
+        Pattern: "%msg%n"
     File:
       name: File
       fileName: log/transaction.log
       PatternLayout:
-        Pattern: "%d %p %C{1.} [%t] %m%n"
+        Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger - %msg%n"
   Loggers:
-    logger:
-      -
-        name: org.apache.logging.log4j.test2
-        level: info
-        additivity: false
-        AppenderRef:
-          ref: File
     Root:
-      level: info
-      AppenderRef:
-        ref: Console
+      -
+        level: info
+        AppenderRef:
+          -
+            ref: File
+          -
+            ref: Console

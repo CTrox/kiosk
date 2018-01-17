@@ -13,8 +13,6 @@ import ch.ctrox.school.kiosk.business.products.StrongAlcohol;
 public class ArticleTest {
   @Test
   public void testArticle() {
-    System.out.println("test");
-
     Product vodka = new StrongAlcohol("Vodka");
     if (vodka.requiresAgeCheck()) {
       System.out.println("You are not " + vodka.getRequiredAge() + " years old");

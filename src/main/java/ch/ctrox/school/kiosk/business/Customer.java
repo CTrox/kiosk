@@ -1,5 +1,8 @@
 package ch.ctrox.school.kiosk.business;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,12 +12,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Customer {
   private static final AtomicInteger count = new AtomicInteger(0);
+  private static final Logger logger = LogManager.getLogger(Kiosk.class);
   private Calendar birthDate;
   private int age;
   private long id;
 
   public Customer() {
     this.id = count.incrementAndGet();
+    logger.info(String.format("Creating customer %s", this.id));
   }
 
   public long getId() {
