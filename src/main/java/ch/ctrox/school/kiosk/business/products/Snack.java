@@ -5,7 +5,7 @@ package ch.ctrox.school.kiosk.business.products;
  * @since 21/09/17
  */
 public class Snack extends AbstractProduct {
-  Snack(String name) {
+  public Snack(String name) {
     super(name);
   }
 

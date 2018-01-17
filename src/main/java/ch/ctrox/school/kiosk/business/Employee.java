@@ -1,5 +1,7 @@
 package ch.ctrox.school.kiosk.business;
 
+import ch.ctrox.school.kiosk.error.InvalidProductException;
+import ch.ctrox.school.kiosk.error.OutOfStockException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,12 +19,13 @@ public class Employee {
   private static final AtomicInteger count = new AtomicInteger(0);
   private String name;
   private int id;
-  private int kioskId;
+  private Kiosk kiosk;
 
   private static final Logger logger = LogManager.getLogger(Employee.class);
 
-  public Employee(String name) {
+  public Employee(String name, Kiosk kiosk) {
     this.name = name;
+    this.kiosk = kiosk;
     this.id = count.incrementAndGet();
   }
 
@@ -30,15 +33,28 @@ public class Employee {
     return name;
   }
 
-  public int getKioskId() {
-    return kioskId;
+  public Kiosk getKiosk() {
+    return kiosk;
   }
 
-  public void setKioskId(int kioskId) {
-    this.kioskId = kioskId;
+  public void setKiosk(Kiosk kiosk) {
+    this.kiosk = kiosk;
   }
 
-  public Product sellProduct(Product product, Customer customer) throws UnderageException, NoIdentificationException {
+  public Product sellProduct(Product product, Customer customer)
+          throws UnderageException, NoIdentificationException, InvalidProductException, OutOfStockException {
+    Product inventoryProduct = kiosk.getInventory().getByName(product.getName());
+    if (inventoryProduct == null) {
+      throw new InvalidProductException(String.format(
+              "Requested Product '%s' does not exist in kiosk inventory",
+              product.getName()));
+    }
+    if (inventoryProduct.getCount() < product.getCount()) {
+      throw new OutOfStockException(String.format(
+              "Requested count (%s) of Product '%s' is more than in stock",
+              product.getName(),
+              product.getCount()));
+    }
     if (product.requiresAgeCheck()) {
       if (customer.getBirthDate() == null) {
         throw new NoIdentificationException(String.format(

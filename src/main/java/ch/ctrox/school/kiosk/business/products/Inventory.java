@@ -39,5 +39,14 @@ public class Inventory {
     return total;
   }
 
+  public Product getByName(String name) {
+    for (Product product: this.list.values()) {
+      if (product.getName().equals(name)) {
+        return product;
+      }
+    }
+    return null;
+  }
+
 
 }
