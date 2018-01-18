@@ -32,7 +32,7 @@ public class SupplierTest {
   {
     Kiosk kiosk = new Kiosk("Bern");
     employee = new Employee("Peter Verkauf", kiosk);
-    customer = new Customer();
+    customer = Customer.create();
   }
 
   @Test (expected = InsufficentFundsException.class)

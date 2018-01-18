@@ -35,8 +35,7 @@ public class CustomerTransactionTest {
   {
     Kiosk kiosk = new Kiosk("Zürich");
     employee = new Employee("Hans Verkauf", kiosk);
-    customer = new Customer();
-    customer.start();
+    customer = Customer.create();
   }
 
   @Test(expected = UnderageException.class)
@@ -67,10 +66,8 @@ public class CustomerTransactionTest {
 
   @Test()
   public void testNormalTransaction() throws NoIdentificationException, InvalidProductException, UnderageException, OutOfStockException {
-    Customer customer2 = new Customer();
-    customer2.start();
-    Customer customer3 = new Customer();
-    customer3.start();
+    Customer customer2 = Customer.create();
+    Customer customer3 = Customer.create();
     Product magazine = new Magazine("Ride");
     employee.sellProduct(magazine, customer);
     employee.sellProduct(magazine, customer2);

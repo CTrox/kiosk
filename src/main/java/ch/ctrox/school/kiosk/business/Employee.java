@@ -99,11 +99,7 @@ public class Employee {
 
     Checkout checkout = new Checkout(this);
     double cash = 0;
-    try {
-      cash = customer.getCash(product.getPrice());
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    cash = customer.getCash(product.getPrice());
     checkout.putCash(cash);
 
     logger.info(String.format(
