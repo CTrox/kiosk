@@ -105,11 +105,9 @@ public class InventoryService {
   public byte[] inventoryToCSV(Inventory inventory) {
     StringBuilder sb = new StringBuilder();
     appendHeader(sb);
-    // sort collection by price (descending)
-    Collection<Product> sortedInventory = inventory.getList().stream()
-            .sorted(Comparator.comparing(Product::getPrice).reversed())
-            .collect(Collectors.toList());
-    for (Product product: sortedInventory) {
+    // use sorted by price for storage
+    for (Product product: inventory.getListSortedByPrice()) {
+      // append product to StringBuilder
       appendProduct(sb, product);
     }
     return sb.toString().getBytes();

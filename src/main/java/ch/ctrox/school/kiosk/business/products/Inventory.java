@@ -1,7 +1,9 @@
 package ch.ctrox.school.kiosk.business.products;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class Inventory {
   private HashMap<Integer, Product> list;
@@ -12,6 +14,17 @@ public class Inventory {
 
   public Collection<Product> getList() {
     return list.values();
+  }
+
+  /**
+   * Sorts the product collection descending by price
+   * using a fancy java 8 stream
+   * @return the sorted collection
+   */
+  public Collection<Product> getListSortedByPrice() {
+    return this.getList().stream()
+            .sorted(Comparator.comparing(Product::getPrice).reversed())
+            .collect(Collectors.toList());
   }
 
   /**
