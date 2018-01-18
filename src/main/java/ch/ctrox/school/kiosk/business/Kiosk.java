@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * Kiosk class
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */
@@ -25,6 +26,9 @@ public class Kiosk {
   private Supplier supplier;
   private Inventory inventory;
 
+  /**
+   * Kiosk states
+   */
   private enum state {
     OPEN,
     CLOSED
@@ -38,6 +42,10 @@ public class Kiosk {
     return openState;
   }
 
+  /**
+   * Creates a new kiosk
+   * @param location the location of the to be created kiosk
+   */
   public Kiosk(String location) {
     this.id = count.incrementAndGet();
     this.location = location;
@@ -53,6 +61,10 @@ public class Kiosk {
     }
   }
 
+  /**
+   * Opens the kiosk
+   * @param employee who wants to open it
+   */
   public void open(Employee employee) {
     logger.info(String.format(
             "%s opens kiosk %s in %s",
@@ -61,7 +73,11 @@ public class Kiosk {
     this.openState = state.OPEN;
   }
 
-  public void close() {
+  /**
+   * Closes the kiosk
+   * @param employee who wants to close it
+   */
+  public void close(Employee employee) {
     logger.info(String.format(
             "%s closes kiosk %s in %s",
             employee.getName(), this.id, this.location)

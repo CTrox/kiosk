@@ -18,10 +18,10 @@ import ch.ctrox.school.kiosk.error.InsufficentFundsException;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Tests some supplier functions
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */
-
 public class SupplierTest {
   private static final Logger logger = LogManager.getLogger(SupplierTest.class);
   private Employee employee;

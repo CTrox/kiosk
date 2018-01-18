@@ -1,6 +1,7 @@
 package ch.ctrox.school.kiosk.business.products;
 
 /**
+ * The Snack product
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */
@@ -13,6 +14,9 @@ public class Snack extends AbstractProduct {
     super();
   }
 
+  /**
+   * Defines all the Snack types
+   */
   public enum Type {
     SANDWICH("Sandwich"),
     SWEET("Süssig"),

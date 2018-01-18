@@ -1,6 +1,8 @@
 package ch.ctrox.school.kiosk.business.products;
 
 /**
+ * Defines a abstract product which can be extended
+ * by individual products
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */

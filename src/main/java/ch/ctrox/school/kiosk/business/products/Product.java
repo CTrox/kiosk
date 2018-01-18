@@ -3,6 +3,7 @@ package ch.ctrox.school.kiosk.business.products;
 import java.util.List;
 
 /**
+ * The interface the AbstractProduct implements
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */

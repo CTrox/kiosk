@@ -12,6 +12,7 @@ import ch.ctrox.school.kiosk.error.NoIdentificationException;
 import ch.ctrox.school.kiosk.error.UnderageException;
 
 /**
+ * Employee class
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */
@@ -22,7 +23,11 @@ public class Employee {
   private int id;
   private Kiosk kiosk;
 
-
+  /**
+   * Creates a new employee
+   * @param name the name of the employee
+   * @param kiosk the kiosk the employee belongs to
+   */
   public Employee(String name, Kiosk kiosk) {
     this.name = name;
     this.kiosk = kiosk;
@@ -43,6 +48,17 @@ public class Employee {
     this.kiosk = kiosk;
   }
 
+  /**
+   * Does quite a few checks and eventually
+   * sells a product to the customer
+   * @param product the requested product to sell
+   * @param customer the customer who buys it
+   * @return the bought product
+   * @throws UnderageException the customer is too young to buy
+   * @throws NoIdentificationException the customer does not have an ID to show
+   * @throws InvalidProductException the requested product does not exist
+   * @throws OutOfStockException the requested amount of product is not available
+   */
   public Product sellProduct(Product product, Customer customer)
           throws UnderageException, NoIdentificationException, InvalidProductException, OutOfStockException {
     Product inventoryProduct = kiosk.getInventory().getByName(product.getName());

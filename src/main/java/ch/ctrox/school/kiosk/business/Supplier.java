@@ -13,6 +13,7 @@ import java.util.Collection;
 import ch.ctrox.school.kiosk.business.products.Product;
 
 /**
+ * Supplier class
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */
@@ -22,8 +23,8 @@ public class Supplier {
 
   public Supplier() {
     InventoryService service = new InventoryService("supplier", null);
-    // load supplier inventory
     try {
+      // load supplier inventory
       inventory = service.load();
     } catch (IOException e) {
       e.printStackTrace();
@@ -36,7 +37,14 @@ public class Supplier {
     return inventory;
   }
 
-  public boolean orderProducts(Collection<Product> productList, double money) throws IOException, InvalidInventoryException {
+  /**
+   * Places a product order
+   * @param productList a collection of the products to order
+   * @param money the money to pay for the products
+   * @return boolean to indicate if the order
+   * has been placed successfully
+   */
+  public boolean orderProducts(Collection<Product> productList, double money) {
     for (Product product : productList) {
       if (inventory.get(product.getId()) == null) {
         logger.error(String.format("Error ordering product %sx %s", product.getCount(), product.getName()));

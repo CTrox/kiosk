@@ -1,6 +1,7 @@
 package ch.ctrox.school.kiosk.business.products;
 
 /**
+ * The StrongAlcohol (Everything not beer or wine) Product
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */

@@ -1,6 +1,7 @@
 package ch.ctrox.school.kiosk.business.products;
 
 /**
+ * The Magazine product
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */
@@ -13,6 +14,9 @@ public class Magazine extends AbstractProduct {
     super();
   }
 
+  /**
+   * Defines all Magazine types
+   */
   public enum Type {
     LOCAL("Lokal"),
     INTERNATIONAL("International"),

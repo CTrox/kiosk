@@ -6,6 +6,8 @@ import ch.ctrox.school.kiosk.business.products.Product;
 import ch.ctrox.school.kiosk.business.products.StrongAlcohol;
 
 /**
+ * A simple product test which is now covered by
+ * more complex tests but it does not hurt
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 12/09/17
  */

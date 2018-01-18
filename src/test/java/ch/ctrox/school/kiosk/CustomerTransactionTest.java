@@ -20,6 +20,7 @@ import ch.ctrox.school.kiosk.error.NoIdentificationException;
 import ch.ctrox.school.kiosk.error.UnderageException;
 
 /**
+ * Tests a variety of valid and invalid transactions
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */

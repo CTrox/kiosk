@@ -1,5 +1,10 @@
 package ch.ctrox.school.kiosk.business.products;
 
+/**
+ * Builds products from a category String
+ * @author Cyrill Troxler <cyrilltroxler@gmail.com>
+ * @since 03/01/18
+ */
 public class ProductFactory {
   public static Product build(String category) {
     if (category.equals("LightAlcohol")) {

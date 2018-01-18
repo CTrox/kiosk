@@ -14,10 +14,21 @@ import ch.ctrox.school.kiosk.business.products.Product;
 import ch.ctrox.school.kiosk.business.products.ProductFactory;
 import ch.ctrox.school.kiosk.error.InvalidInventoryException;
 
+/**
+ * InventoryService class
+ * @author Cyrill Troxler <cyrilltroxler@gmail.com>
+ * @since 03/01/18
+ */
 public class InventoryService {
   private String name;
   private String basePath;
 
+  /**
+   * Creates a new InventoryService
+   * @param name the name of the inventory
+   * @param basePath the file path where the inventory
+   * is stored/loaded from
+   */
   public InventoryService(String name, String basePath) {
     this.name = name;
     if (basePath == null) {
@@ -27,15 +38,32 @@ public class InventoryService {
     this.basePath = basePath;
   }
 
+  /**
+   * Loads the inventory from a csv file
+   * @return a inventory object
+   * @throws IOException if the file load fails
+   * @throws InvalidInventoryException if the inventory format is invalid
+   */
   public Inventory load() throws IOException, InvalidInventoryException {
     List<String> csv = Files.readAllLines(Paths.get(String.format("%s/%s_inventory.csv", basePath, name)));
     return csvToInventory(csv);
   }
 
+  /**
+   * Stores a inventory to a csv file
+   * @param inventory to store
+   * @throws IOException if the file write fails
+   */
   public void store(Inventory inventory) throws IOException {
     Files.write(Paths.get(String.format("%s/%s_inventory.csv", basePath, name)), inventoryToCSV(inventory));
   }
 
+  /**
+   * Parses the actual csv to a inventory object
+   * @param csv file as a List<String>
+   * @return the inventory
+   * @throws InvalidInventoryException if the inventory format is invalid
+   */
   private Inventory csvToInventory(List<String> csv) throws InvalidInventoryException {
     Inventory inventory = new Inventory();
     for (ListIterator<String> it = csv.listIterator(); it.hasNext();) {
@@ -69,6 +97,11 @@ public class InventoryService {
     return inventory;
   }
 
+  /**
+   * Converts a inventory to a csv byte array
+   * @param inventory to convert
+   * @return a byte array of the inventory in a csv format
+   */
   public byte[] inventoryToCSV(Inventory inventory) {
     StringBuilder sb = new StringBuilder();
     appendHeader(sb);
@@ -82,6 +115,10 @@ public class InventoryService {
     return sb.toString().getBytes();
   }
 
+  /**
+   * Appends a csv header
+   * @param sb to append to
+   */
   private void appendHeader(StringBuilder sb) {
     // id,name,category,description,price,count
     sb.append("id");
@@ -98,6 +135,11 @@ public class InventoryService {
     sb.append('\n');
   }
 
+  /**
+   * Appends a product
+   * @param sb to append to
+   * @param product to use
+   */
   private void appendProduct(StringBuilder sb, Product product) {
     sb.append(product.getId());
     sb.append(',');

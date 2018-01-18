@@ -1,6 +1,7 @@
 package ch.ctrox.school.kiosk.business.products;
 
 /**
+ * The SoftDrink product
  * @author Cyrill Troxler <cyrilltroxler@gmail.com>
  * @since 21/09/17
  */

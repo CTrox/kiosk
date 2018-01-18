@@ -14,6 +14,10 @@ public class Inventory {
     return list.values();
   }
 
+  /**
+   * Adds a product to the inventory using product.id as the key
+   * @param product the product object to add
+   */
   public void add(Product product) {
     if (this.list.containsKey(product.getId())) {
       // Increment count if product is already in inventory
@@ -27,10 +31,19 @@ public class Inventory {
     }
   }
 
-  public Product get(int i) {
-    return this.list.get(i);
+  /**
+   * Gets a product by id
+   * @param id of the id
+   * @return the requested product
+   */
+  public Product get(int id) {
+    return this.list.get(id);
   }
 
+  /**
+   * Calculates the total price of all products of the inventory
+   * @return a double value of the price
+   */
   public double getTotalPrice() {
     double total = 0d;
     for (Product product: this.list.values()) {
@@ -39,6 +52,11 @@ public class Inventory {
     return total;
   }
 
+  /**
+   * Gets a product by name
+   * @param name of the product
+   * @return the requested product
+   */
   public Product getByName(String name) {
     for (Product product: this.list.values()) {
       if (product.getName().equals(name)) {
@@ -47,6 +65,5 @@ public class Inventory {
     }
     return null;
   }
-
 
 }
